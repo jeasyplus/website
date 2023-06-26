@@ -1,2 +1,7 @@
 
 .DS_Store
+.idea/website.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/sonarlint/issuestore/index.pb
+.idea/vcs.xml
