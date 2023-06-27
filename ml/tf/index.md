@@ -48,6 +48,7 @@ TPU（Tensor Processing Unit）是由Google设计和开发的专用集成电路�
 ### NumPy 和 Pandas
 
 使用 tf.keras 时，您至少需要对以下两个开源 Python 库有所了解：
+
 NumPy（Numerical Python）和Pandas是两个在数据科学和分析领域广泛使用的Python库。
 
 + [NumPy](https://numpy.org/) - 简化对数组的表示和执行线性代数运算。
@@ -58,19 +59,10 @@ NumPy（Numerical Python）和Pandas是两个在数据科学和分析领域广�
   + NumPy的优势在于其高效的数组操作和广播功能，使得处理大规模数据集更加高效和便捷。
 
 ```python
-"""
-To try the examples in the browser:
-1. Type code in the input cell and press
-   Shift + Enter to execute
-2. Or copy paste the code, and click on
-   the "Run" button in the toolbar
-"""
-
-# The standard way to import NumPy:
+# 导入NumPy的标准方式：
 import numpy as np
 
-# Create a 2-D array, set every second element in
-# some rows and find max per row:
+# 创建一个二维数组，设置某些行的每隔一个元素为-99，并找到每行的最大值：
 
 x = np.arange(15, dtype=np.int64).reshape(3, 5)
 x[1:, ::2] = -99
@@ -82,7 +74,7 @@ x
 x.max(axis=1)
 # array([ 4,  8, 13])
 
-# Generate normally distributed random numbers:
+# 生成正态分布的随机数：
 rng = np.random.default_rng()
 samples = rng.normal(size=2500)
 samples
@@ -96,9 +88,12 @@ samples
   + Pandas提供了各种数据操作和处理功能，包括数据的读取和写入、数据清洗和转换、数据筛选和排序、数据聚合和分组等。
   + 它还具备对缺失数据的处理、时间序列数据的处理、数据的合并和连接、数据的可视化等功能。
   + Pandas的优势在于其灵活性和高效性，能够处理不规则和缺失数据，并提供了广泛的数据操作和分析工具，使得数据科学工作更加便捷和高效。
+
+
 ```python
 In [1]: import pandas as pd
 ```
+
 ```python
 In [2]: df = pd.DataFrame(
    ...:     {
