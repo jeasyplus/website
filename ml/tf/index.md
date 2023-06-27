@@ -475,6 +475,14 @@ training_df["median_house_value"] /= 1000.0
 # 打印 pandas DataFrame 的前几行数据。
 training_df.head()
 ```
+| longitude | latitude | housing_median_age | total_rooms | total_bedrooms | population | households | median_income | median_house_value |
+|-----------|----------|--------------------|-------------|----------------|------------|------------|---------------|-------------------|
+| -114.3    | 34.2     | 15.0               | 5612.0      | 1283.0         | 1015.0     | 472.0      | 1.5           | 66.9              |
+| -114.5    | 34.4     | 19.0               | 7650.0      | 1901.0         | 1129.0     | 463.0      | 1.8           | 80.1              |
+| -114.6    | 33.7     | 17.0               | 720.0       | 174.0          | 333.0      | 117.0      | 1.7           | 85.7              |
+| -114.6    | 33.6     | 14.0               | 1501.0      | 337.0          | 515.0      | 226.0      | 3.2           | 73.4              |
+| -114.6    | 33.6     | 20.0               | 1454.0      | 326.0          | 624.0      | 262.0      | 1.9           | 65.5              |
+
 对 median_house_value 进行缩放将每个房屋的值以千为单位进行表示。
 
 缩放可以将损失值和学习率保持在更友好的范围内。
@@ -495,3 +503,466 @@ training_df.head()
 # 获取数据集的统计信息
 training_df.describe()
 ```
+| Statistic | longitude | latitude | housing_median_age | total_rooms | total_bedrooms | population | households | median_income | median_house_value |
+|-----------|-----------|----------|--------------------|-------------|----------------|------------|------------|---------------|--------------------|
+| count     | 17000.0   | 17000.0  | 17000.0            | 17000.0     | 17000.0        | 17000.0    | 17000.0    | 17000.0       | 17000.0            |
+| mean      | -119.6    | 35.6     | 28.6               | 2643.7      | 539.4          | 1429.6     | 501.2      | 3.9           | 207.3              |
+| std       | 2.0       | 2.1      | 12.6               | 2179.9      | 421.5          | 1147.9     | 384.5      | 1.9           | 116.0              |
+| min       | -124.3    | 32.5     | 1.0                | 2.0         | 1.0            | 3.0        | 1.0        | 0.5           | 15.0               |
+| 25%       | -121.8    | 33.9     | 18.0               | 1462.0      | 297.0          | 790.0      | 282.0      | 2.6           | 119.4              |
+| 50%       | -118.5    | 34.2     | 29.0               | 2127.0      | 434.0          | 1167.0     | 409.0      | 3.5           | 180.4              |
+| 75%       | -118.0    | 37.7     | 37.0               | 3151.2      | 648.2          | 1721.0     | 605.2      | 4.8           | 265.0              |
+| max       | -114.3    | 42.0     | 52.0               | 37937.0     | 6445.0         | 35682.0    | 6082.0     | 15.0          | 500.0              |
+
+**任务 1：识别数据集中的异常值**
+
+你是否在数据中看到任何异常值（奇怪的数值）？
+```python
+"""
+# 几个列的最大值（max）与其他四分位数相比似乎非常高。例如，total_rooms列。
+# 根据四分位数值（25％，50％和75％），您可能期望total_rooms的最大值约为5,000或可能为10,000。然而，实际的最大值却是37,937。
+
+# 当您在一列中看到异常值时，要更加谨慎地将该列作为特征使用。
+# 尽管如此，潜在特征中的异常值有时会与标签中的异常值相对应，这可能使该列成为一个（或看起来是）强有力的特征。
+# 此外，正如您在课程后面将会看到的，您可以通过表示（预处理）原始数据来将列转化为有用的特征。
+"""
+```
+
+**定义构建和训练模型的函数**
+
+下面的代码定义了两个函数：
+
++ build_model(my_learning_rate)：用于构建一个随机初始化的模型。
+
+
++ train_model(model, feature, label, epochs)：用于根据传入的示例（feature和label）训练模型。
+
+由于您现在不需要理解构建模型的代码，我们已将此代码单元格隐藏起来。您可以选择双击以下标题以查看构建和训练模型的代码。
+
+__定义构建和训练模型的函数__
+```python
+#@title 定义构建和训练模型的函数
+def build_model(my_learning_rate):
+  """创建并编译一个简单的线性回归模型。"""
+  # 大多数简单的tf.keras模型是顺序模型。
+  model = tf.keras.models.Sequential()
+
+  # 描述模型的拓扑结构。
+  # 简单线性回归模型的拓扑结构是单个层中的单个节点。
+  model.add(tf.keras.layers.Dense(units=1, 
+                                  input_shape=(1,)))
+
+  # 将模型的拓扑结构编译成TensorFlow可以高效执行的代码。配置训练以最小化模型的均方误差。
+  model.compile(optimizer=tf.keras.optimizers.experimental.RMSprop(learning_rate=my_learning_rate),
+                loss="mean_squared_error",
+                metrics=[tf.keras.metrics.RootMeanSquaredError()])
+
+  return model        
+
+
+def train_model(model, df, feature, label, epochs, batch_size):
+  """通过提供数据来训练模型。"""
+
+  # 将特征和标签提供给模型。
+  # 模型将在指定的epoch数上进行训练。
+  history = model.fit(x=df[feature],
+                      y=df[label],
+                      batch_size=batch_size,
+                      epochs=epochs)
+
+  # 收集训练模型的权重和偏差。
+  trained_weight = model.get_weights()[0]
+  trained_bias = model.get_weights()[1]
+
+  # epoch列表与其余的history分开存储。
+  epochs = history.epoch
+  
+  # 提取每个epoch的误差。
+  hist = pd.DataFrame(history.history)
+
+  # 为了跟踪训练的进展，我们将在每个epoch处记录模型的均方根误差。
+  rmse = hist["root_mean_squared_error"]
+
+  return trained_weight, trained_bias, epochs, rmse
+
+print("已定义build_model和train_model函数。")
+```
+
+**定义绘图函数**
+
+以下的matplotlib函数创建了以下图表：
+
++ 一个特征与标签的散点图，并显示经过训练的模型的输出线条
+
++ 一个损失曲线
+
+您可以选择双击标题以查看matplotlib代码，但请注意编写matplotlib代码并不是学习机器学习编程的重要部分。
+
+**定义绘图函数如下：**
+```python
+#@title 定义绘图函数
+def plot_the_model(trained_weight, trained_bias, feature, label):
+  """将经过训练的模型与200个随机训练示例绘制在一起。"""
+
+  # 标记坐标轴。
+  plt.xlabel(feature)
+  plt.ylabel(label)
+
+  # 从数据集中随机选择200个点创建散点图。
+  random_examples = training_df.sample(n=200)
+  plt.scatter(random_examples[feature], random_examples[label])
+
+  # 创建一个红色线条表示模型。红色线条起点坐标为(x0, y0)，终点坐标为(x1, y1)。
+  x0 = 0
+  y0 = trained_bias
+  x1 = random_examples[feature].max()
+  y1 = trained_bias + (trained_weight * x1)
+  plt.plot([x0, x1], [y0, y1], c='r')
+
+  # 绘制散点图和红色线条。
+  plt.show()
+
+
+def plot_the_loss_curve(epochs, rmse):
+  """绘制损失与epoch的曲线。"""
+
+  plt.figure()
+  plt.xlabel("Epoch")
+  plt.ylabel("Root Mean Squared Error")
+
+  plt.plot(epochs, rmse, label="Loss")
+  plt.legend()
+  plt.ylim([rmse.min()*0.97, rmse.max()])
+  plt.show()  
+
+print("已定义plot_the_model和plot_the_loss_curve函数。")
+```
+**调用模型函数**
+
+机器学习的一个重要部分是确定哪些特征与标签相关。
+
+例如，真实生活中的房屋价值预测模型通常依赖于数百个特征和合成特征。然而，这个模型只依赖于一个特征。
+
+目前，您将任意选择total_rooms作为该特征。
+
+```python
+# 以下变量是超参数。
+learning_rate = 0.01
+epochs = 30
+batch_size = 30
+
+# 指定特征和标签。
+my_feature = "total_rooms"  # 特定城市街区的总房间数。
+my_label = "median_house_value"  # 特定城市街区的房屋中位数价值。
+# 也就是说，您将创建一个仅基于total_rooms预测房屋价值的模型。
+
+# 丢弃任何已存在的模型版本。
+my_model = None
+
+# 调用函数。
+my_model = build_model(learning_rate)
+weight, bias, epochs, rmse = train_model(my_model, training_df,
+                                         my_feature, my_label,
+                                         epochs, batch_size)
+
+print("\nThe learned weight for your model is %.4f" % weight)
+print("The learned bias for your model is %.4f\n" % bias )
+
+plot_the_model(weight, bias, my_feature, my_label)
+plot_the_loss_curve(epochs, rmse)
+```
+```shell
+Epoch 29/30
+567/567 [==============================] - 1s 1ms/step - loss: 15469.9658 - root_mean_squared_error: 124.3783
+Epoch 30/30
+567/567 [==============================] - 1s 1ms/step - loss: 15328.4785 - root_mean_squared_error: 123.8082
+
+The learned weight for your model is 0.0215
+The learned bias for your model is 132.1367
+
+/usr/local/lib/python3.10/dist-packages/numpy/core/shape_base.py:65: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  ary = asanyarray(ary)
+```
+![图](https://jeasyplus.com/images/machine-learning/2023-06-27-15.49.01.png)
+![图](https://jeasyplus.com/images/machine-learning/2023-06-27-15.49.02.png)
+
+在训练模型时，会有一定的随机性影响。因此，每次训练模型时都会得到不同的结果。
+
+也就是说，鉴于数据集和超参数，训练后的模型通常无法很好地描述特征与标签之间的关系。
+
+**使用模型进行预测**
+
+您可以使用训练好的模型进行预测。在实际应用中，您应该对未在训练中使用的示例进行预测。但是，在此练习中，您将只使用相同训练数据集的子集进行操作。稍后的 Colab 练习将探讨如何对未在训练中使用的示例进行预测。
+
+首先，运行以下代码来定义房屋预测函数：
+```python
+def predict_house_values(n, feature, label):
+  """根据特征预测房屋价值。"""
+
+  batch = training_df[feature][10000:10000 + n]
+  predicted_values = my_model.predict_on_batch(x=batch)
+
+  print("feature   label          predicted")
+  print("  value   value          value")
+  print("          in thousand$   in thousand$")
+  print("--------------------------------------")
+  for i in range(n):
+    print ("%5.0f %6.0f %15.0f" % (training_df[feature][10000 + i],
+                                   training_df[label][10000 + i],
+                                   predicted_values[i][0] ))
+```
+现在，对10个示例调用房屋预测函数：
+```python
+  predict_house_values(10, my_feature, my_label)
+```
+```shell
+feature   label          predicted
+  value   value          value
+          in thousand$   in thousand$
+--------------------------------------
+ 1960     53             174
+ 3400     92             205
+ 3677     69             211
+ 2202     62             179
+ 2403     80             184
+ 5652    295             254
+ 3318    500             203
+ 2552    342             187
+ 1364    118             161
+ 3468    128             207
+```
+
+**任务2：评估模型的预测能力**
+
+观察前面的表格。预测值与标签值有多接近？换句话说，您的模型是否准确预测房屋价值？
+
+```shell
+# 大多数预测值与标签值相差较大，所以训练的模型可能没有太多的预测能力。
+# 然而，前10个示例可能不代表其他示例的情况。
+```
+
+**任务3：尝试不同的特征**
+
+总房间数特征的预测能力很低。使用人口数量作为特征是否能够提供更好的预测能力？尝试将特征更改为人口数量，而不是总房间数。
+
+注意：当更改特征时，您可能还需要更改超参数。
+
+```python
+my_feature = "?"   # 将 "?" 替换为 "population" 或其他列名。
+
+# 调整超参数进行实验。
+learning_rate = 2
+epochs = 3
+batch_size = 120
+
+# 不要更改此行以下的任何内容。
+my_model = build_model(learning_rate)
+weight, bias, epochs, rmse = train_model(my_model, training_df, 
+                                         my_feature, my_label,
+                                         epochs, batch_size)
+plot_the_model(weight, bias, my_feature, my_label)
+plot_the_loss_curve(epochs, rmse)
+
+predict_house_values(15, my_feature, my_label)
+```
+实际代码
+```python
+my_feature = "population" # Pick a feature other than "total_rooms"
+
+# Possibly, experiment with the hyperparameters.
+learning_rate = 0.05
+epochs = 18
+batch_size = 3
+
+# Don't change anything below.
+my_model = build_model(learning_rate)
+weight, bias, epochs, rmse = train_model(my_model, training_df, 
+                                         my_feature, my_label,
+                                         epochs, batch_size)
+
+plot_the_model(weight, bias, my_feature, my_label)
+plot_the_loss_curve(epochs, rmse)
+
+predict_house_values(10, my_feature, my_label)
+```
+```shell
+5667/5667 [==============================] - 8s 1ms/step - loss: 18132.3945 - root_mean_squared_error: 134.6566
+Epoch 18/18
+5667/5667 [==============================] - 8s 1ms/step - loss: 17837.1973 - root_mean_squared_error: 133.5560
+/usr/local/lib/python3.10/dist-packages/numpy/core/shape_base.py:65: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  ary = asanyarray(ary)
+```
+![图](https://jeasyplus.com/images/machine-learning/2023-06-27-15.49.03.png)
+![图](https://jeasyplus.com/images/machine-learning/2023-06-27-15.49.05.png)
+```shell
+feature   label          predicted
+  value   value          value
+          in thousand$   in thousand$
+--------------------------------------
+ 1286     53             153
+ 1867     92             127
+ 2191     69             113
+ 1052     62             163
+ 1647     80             137
+ 2312    295             108
+ 1604    500             139
+ 1066    342             163
+  338    118             195
+ 1604    128             139
+```
+**人口数量(population)**是否产生了比**总房间数(total_rooms)** 更好的预测结果？
+```shell
+# 训练并不完全确定性，但通常情况下，人口数量的均方根误差略高于总房间数。
+# 因此，人口数量在进行预测方面与总房间数大致相同或稍差一些。
+```
+
+**任务 4：定义一个合成特征**
+
+你已经确定了总房间数和人口数量这两个特征并不有用。
+
+也就是说，无论是社区的总房间数还是社区的人口数量都没有成功预测该社区的房屋中位数价格。
+
+然而，也许总房间数与人口数量的比值可能具有一定的预测能力。也就是说，区块密度可能与房屋中位数价格相关。
+
+为了探索这个假设，进行以下操作：
+
++ 创建一个合成特征，它是总房间数与人口数量的比值。（如果你对pandas DataFrame不熟悉，请学习Pandas DataFrame超快速教程。）
+
+
++ 调整三个超参数。
+
+
++ 确定这个合成特征是否比你之前尝试过的任何单个特征产生更低的损失值。
+
+```python
+# 定义一个名为 rooms_per_person 的合成特征
+training_df["rooms_per_person"] = ?  # 在这里编写你的代码。
+
+# 不要改变下一行。
+my_feature = "rooms_per_person"
+
+# 为这三个超参数赋值。
+learning_rate = ?
+epochs = ?
+batch_size = ?
+
+# 不要改变下面的任何内容。
+my_model = build_model(learning_rate)
+weight, bias, epochs, rmse = train_model(my_model, training_df,
+                                         my_feature, my_label,
+                                         epochs, batch_size)
+
+plot_the_loss_curve(epochs, rmse)
+predict_house_values(15, my_feature, my_label)
+```
+实际代码：
+```python
+#@title Double-click to view a possible solution to Task 4.
+
+# Define a synthetic feature
+training_df["rooms_per_person"] = training_df["total_rooms"] / training_df["population"]
+my_feature = "rooms_per_person"
+
+# Tune the hyperparameters.
+learning_rate = 0.06
+epochs = 24
+batch_size = 30
+
+# Don't change anything below this line.
+my_model = build_model(learning_rate)
+weight, bias, epochs, mae = train_model(my_model, training_df,
+                                        my_feature, my_label,
+                                        epochs, batch_size)
+
+plot_the_loss_curve(epochs, mae)
+predict_house_values(15, my_feature, my_label)
+```
+```shell
+Epoch 23/24
+567/567 [==============================] - 1s 2ms/step - loss: 13381.8252 - root_mean_squared_error: 115.6798
+Epoch 24/24
+567/567 [==============================] - 1s 2ms/step - loss: 13357.2529 - root_mean_squared_error: 115.5736
+```
+![图](https://jeasyplus.com/images/machine-learning/2023-06-27-15.49.07.png)
+```shell
+feature   label          predicted
+  value   value          value
+          in thousand$   in thousand$
+--------------------------------------
+    2     53             190
+    2     92             201
+    2     69             196
+    2     62             212
+    1     80             187
+    2    295             226
+    2    500             211
+    2    342             224
+    4    118             289
+    2    128             215
+    2    187             225
+    3     80             235
+    2    112             226
+    2     95             220
+    2     69             211
+```
+
+根据损失值，这个合成特征产生的模型比你在任务2和任务3中尝试的单个特征模型更好。
+
+然而，这个模型仍然不能产生很好的预测结果。
+
+**任务 5. 寻找与标签相关的特征**
+
+到目前为止，我们依靠试错的方法来确定可能用于模型的特征。现在，我们将依靠统计数据来进行分析。
+
+相关矩阵显示每个属性的原始值与其他属性的原始值之间的关系。相关系数具有以下含义：
+
++ 1.0：完全正相关；即一个属性上升，另一个属性也上升。
+
++ -1.0：完全负相关；即一个属性上升，另一个属性下降。
+
++ 0.0：无相关性；两列之间没有线性关系。
+
+通常情况下，相关系数的绝对值越大，其预测能力就越强。例如，相关系数为-0.8的预测能力远远优于相关系数为-0.2的预测能力。
+
+以下代码单元格生成了加利福尼亚住房数据集属性的相关矩阵：
+```python
+# Generate a correlation matrix.
+training_df.corr()
+```
+```python
+correlation_matrix = """
+|                           | longitude | latitude | housing_median_age | total_rooms | total_bedrooms | population | households | median_income | median_house_value | rooms_per_person |
+|---------------------------|-----------|----------|--------------------|-------------|----------------|------------|------------|---------------|--------------------|-----------------|
+| longitude                 | 1.0       | -0.9     | -0.1               | 0.0         | 0.1            | 0.1        | 0.1        | -0.0          | -0.0               | -0.1            |
+| latitude                  | -0.9      | 1.0      | 0.0                | -0.0        | -0.1           | -0.1       | -0.1       | -0.1          | 0.1                | 0.1             |
+| housing_median_age        | -0.1      | 0.0      | 1.0                | -0.4        | -0.3           | -0.3       | -0.3       | -0.1          | 0.1                | -0.1            |
+| total_rooms               | 0.0       | -0.0     | -0.4               | 1.0         | 0.9            | 0.9        | 0.9        | 0.2           | 0.1                | 0.1             |
+| total_bedrooms            | 0.1       | -0.1     | -0.3               | 0.9         | 1.0            | 0.9        | 1.0        | -0.0          | 0.0                | 0.0             |
+| population                | 0.1       | -0.1     | -0.3               | 0.9         | 0.9            | 1.0        | 0.9        | -0.0          | -0.0               | -0.1            |
+| households                | 0.1       | -0.1     | -0.3               | 0.9         | 1.0            | 0.9        | 1.0        | 0.0           | 0.1                | -0.0            |
+| median_income             | -0.0      | -0.1     | -0.1               | 0.2         | -0.0           | -0.0       | 0.0        | 1.0           | 0.7                | 0.2             |
+| median_house_value        | -0.0      | -0.1     | 0.1                | 0.1         | 0.0            | -0.0       | 0.1        | 0.7           | 1.0                | 0.2             |
+| rooms_per_person          | -0.1      | 0.1      | -0.1               | 0.1         | 0.0            | -0.1       | -0.0       | 0.2           | 0.2                | 1.0             |
+"""
+print(correlation_matrix)
+```
+
+相关矩阵显示了九个潜在特征（包括一个合成特征）和一个标签（median_house_value）。
+
+与标签具有强烈的负相关或正相关关系的特征可能是一个很好的候选特征。
+
+**你的任务是：** 确定这九个潜在特征中哪一个似乎是最佳的特征候选者？
+```shell
+# median_income与标签median_house_value的相关系数为0.7，
+
+# 所以median_income可能是一个很好的特征候选者。
+
+# 其他七个潜在特征的相关系数都相对接近于0。
+
+# 如果时间允许，尝试将median_income作为特征
+
+# 看看模型是否有所改善。
+```
+相关矩阵并不能完全说明问题。在后续的练习中，你将发现其他方法来挖掘潜在特征的预测能力。
+
+**注意：** 使用median_income作为特征可能会引起一些道德和公平性问题。在课程的最后阶段，我们将探讨道德和公平性问题。
