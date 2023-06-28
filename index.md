@@ -16,4 +16,4 @@
 ---
 有问题联系我：
 
-<img src="https://jeasyplus.com/images/home/wechat.JPG" alt="call me" width="280" height="380">
+<img src="https://jeasyplus.com/images/home/wechat_1618.JPG" alt="call me" width="280" height="380">
