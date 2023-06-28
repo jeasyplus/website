@@ -17,3 +17,6 @@
 
 [ChatGPT Prompt总结](https://jeasyplus.com/chatGPT/ChatGPT文档.pdf)
 
+---
+有问题联系我：
+[call me](https://jeasyplus.com/images/home/wechat.JPG)
