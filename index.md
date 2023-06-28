@@ -15,4 +15,4 @@
 
 ---
 有问题联系我：
-[call me](https://jeasyplus.com/images/home/wechat.JPG)
+![call me](https://jeasyplus.com/images/home/wechat.JPG){width=280 height=280}
