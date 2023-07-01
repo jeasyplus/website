@@ -30,6 +30,46 @@ java -jar arthas-boot.jar
 [arthas@2113]$ redefine 类文件路径+类名.class
 ```
 
+**打开gc日志**
+
+```shell
+vmoption PrintGC true
+
+vmoption PrintGCDetails true
+#等待应用程序的日志文件中输出gc信息
+vmtool --action forceGc  #强制gc
+
+vmoption PrintGCDateStamps true #为GC日志加个时间戳
+```
+
+开启内存对比信息
+```shell
+vmoption HeapDumpBeforeFullGC true
+
+vmoption HeapDumpAfterFullGC  true
+
+##GC日志输出
+023-07-01T13:21:27.589-0800: [Heap Dump (after full gc): Dumping heap to java_pid5667.hprof.1 ...
+Heap dump file created [39592661 bytes in 0.147 secs]
+, 0.1469123 secs]
+
+# 使用pwd查看当前应用的工作目录，
+# 去对应目录查看.hprof文件
+```
+
+**dump分析工具**
+
+IntelliJ IDEA plugins：**VisualVM Launcher**
+
+**[visualvm](https://visualvm.github.io/download.html)**
+
+**OQL**
+```shell
+select s from java.lang.String s where s.toString().startsWith("GH")
+
+select * from java.lang.String  o where o.toString().starWith("324)
+```
+
 **查看内存**
 ```shell
 memory
@@ -39,6 +79,13 @@ memory
 thread
 
 thread 线程id
+
+thread -n 3 #查看最忙的前3个线程
+
+[arthas@5667]$ thread -b #查询阻塞的线程
+No most blocking thread found!
+
+arthas thread -i 200 #每200毫秒动态刷新线程状态
 ```
 jvm信息
 ```shell

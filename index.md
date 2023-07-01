@@ -14,6 +14,7 @@
 [ChatGPT Prompt总结](https://jeasyplus.com/chatGPT/ChatGPT文档.pdf)
 
 [Java JVM GC工具](https://jeasyplus.com/java_gc)
+[Redis锁实现](https://jeasyplus.com/redis/lock)
 
 ---
 有问题联系我：
