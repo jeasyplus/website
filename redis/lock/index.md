@@ -1,4 +1,4 @@
-## Redis锁实现
+## Redis分布式锁实现
 
 **释放锁的lua脚本**
 
@@ -26,12 +26,13 @@ RedisTemplate<Object, Object> redisTemplate;
 public boolean lock(String key,long lockExpireTime){
     try {
         String prefix = lockKeyPrefix(); //锁的前缀
+        String lockKey = prefix + key;
         String value = UUID.randomUUID().toString().replace("-", ""); //唯一值
         lockHolder.set(value); //将本次锁的唯一性值放入当前线程
         //将值存入redis
-        return redisTemplate.opsForValue().setIfAbsent(prefix + key, value, lockExpireTime, TimeUnit.MINUTES);
+        return redisTemplate.opsForValue().setIfAbsent(lockKey, value, lockExpireTime, TimeUnit.MINUTES);
     } catch (Exception e) {
-        log.warn("获取锁定失败,{}","......");
+        log.warn("获取锁定失败,{}","......",e);
     }
     return false;
 }
@@ -50,7 +51,7 @@ public boolean unlock(String key) {
             return true;
         }
     } catch (Exception e) {
-        log.warn(解除锁定失败:{}", "......", e);
+        log.warn("解除锁定失败:{}", "......", e);
     } finally {
         lockHolder.remove();
     }

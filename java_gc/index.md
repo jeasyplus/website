@@ -124,7 +124,11 @@ logger
                                      classLoaderHash 18b4aac2                                                                                                                                                         
                                      target          System.out                          
 ```
+**追踪方法**
 
+```java
+watch com.example.demo.Tst hello
+```
 
 
 logger
@@ -137,6 +141,7 @@ sc com.example.demo.DemoApplication
 ```shell
 sm com.example.demo.DemoApplication
 ```
+
 
 **编译Java文件**
 ```shell
