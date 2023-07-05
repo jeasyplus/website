@@ -15,6 +15,7 @@
 
 [Java JVM GC工具](https://jeasyplus.com/java_gc)
 [Redis锁实现](https://jeasyplus.com/redis/lock)
+[设计模式-patterns](https://jeasyplus.com/patterns)
 
 ---
 有问题联系我：
