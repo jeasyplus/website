@@ -36,7 +36,7 @@ enabled=1
 
 **关闭默认的模块**
 ```shell
-sudo yum module disable mysql
+sudo yum module disable mysql #执行不成功可以跳过
 ```
 
 ## 安装MySQL
