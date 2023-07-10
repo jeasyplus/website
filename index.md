@@ -18,8 +18,11 @@
 [Java同步原语](https://jeasyplus.com/java/lock)
 [设计模式-patterns](https://jeasyplus.com/patterns)
 [DDD(Domain-Driven Design)领域驱动设计](https://jeasyplus.com/ddd)
+
+---
 [复盘高手](https://jeasyplus.com/thinking/retrospective)
 [冲突回避](https://jeasyplus.com/thinking/fearofconflict)
+[表达力提升](https://jeasyplus.com/thinking/speaking-skills)
 
 ---
 有问题联系我：
