@@ -15,6 +15,7 @@
 
 [Java JVM GC工具](https://jeasyplus.com/java_gc)
 [Redis锁实现](https://jeasyplus.com/redis/lock)
+[Java同步原语](https://jeasyplus.com/java/lock)
 [设计模式-patterns](https://jeasyplus.com/patterns)
 [DDD(Domain-Driven Design)领域驱动设计](https://jeasyplus.com/ddd)
 

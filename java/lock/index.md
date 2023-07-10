@@ -1,6 +1,18 @@
 # Java同步原语
 
-多线程编程中实现线程同步和互斥和基本工具是同步原语，通常有以下几种同步原语：
+**同步原语**是指用于实现多线程编程中线程同步和互斥操作的基本工具。
+
+在Java中，我们可以使用不同的**同步原语**来**控制**线程的**并发**访问，**保证数据的一致性和线程安全性**。
+
+常见的Java同步原语包括但不限于：
+
++ **互斥锁（Mutex）：** 如synchronized关键字、java.util.concurrent.locks.Lock及其实现类（如ReentrantLock）等。
++ **信号量（Semaphore）：** 如java.util.concurrent.Semaphore类。
++ **条件变量（Condition Variable）：** 如java.util.concurrent.locks.Condition接口及其实现类。
++ **屏障（Barrier）：** 如java.util.concurrent.CyclicBarrier类。
++ **读写锁（Read-Write Lock）：** 如java.util.concurrent.locks.ReadWriteLock及其实现类（如ReentrantReadWriteLock）等。
+
+这些同步原语提供了不同的机制和功能，用于解决并发编程中的各种问题。通过正确使用和组合这些同步原语，我们可以实现线程之间的同步和互斥，确保数据的一致性和线程安全。
 
 ## 互斥锁（Mutex）：
 
