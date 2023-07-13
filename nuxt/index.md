@@ -1,4 +1,4 @@
-# [Nuxt.js](https://v2.nuxt.com)
+# [Nuxt.js](https://nuxt.com)
 
 Easy to learn. Easy to master
 Learn everything you need to know, from beginner to master.
