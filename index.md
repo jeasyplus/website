@@ -19,6 +19,8 @@
 [Java同步原语](https://jeasyplus.com/java/lock)
 [设计模式-patterns](https://jeasyplus.com/patterns)
 [DDD(Domain-Driven Design)领域驱动设计](https://jeasyplus.com/ddd)
+[微服务概念](https://jeasyplus.com/micro-services)
+[分布式系统](https://jeasyplus.com/distributed-system)
 
 ---
 [复盘高手](https://jeasyplus.com/thinking/retrospective)

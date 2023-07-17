@@ -34,7 +34,9 @@ WHERE condition;
 + 3、update转成insert，异步统计剩余库存。
 + 使用热点数据库：如RDS、TXSQL
 
-https://www.alibabacloud.com/help/zh/apsaradb-for-rds/latest/inventory-hint
+[SQL调优指南](https://www.alibabacloud.com/help/zh/polardb/latest/sql-tuning-guide)
+
+[热点数据处理Inventory Hint](https://www.alibabacloud.com/help/zh/apsaradb-for-rds/latest/inventory-hint)
 
 
-https://cloud.tencent.com/document/product/236/63239
+[腾讯数据库热点更新处理](https://cloud.tencent.com/document/product/236/63239)
