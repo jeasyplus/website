@@ -1,1 +1,1 @@
-# jEasyPlus
+# J-EasyPlus
