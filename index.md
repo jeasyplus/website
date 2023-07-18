@@ -37,6 +37,7 @@
 + [复盘高手](https://jeasyplus.com/thinking/retrospective)
 + [冲突回避](https://jeasyplus.com/thinking/fearofconflict)
 + [表达力提升](https://jeasyplus.com/thinking/speaking-skills)
++ [Ability](https://jeasyplus.com/thinking/ability)
 ---
 有问题联系我：
 
