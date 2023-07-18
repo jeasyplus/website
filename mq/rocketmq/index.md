@@ -71,3 +71,7 @@ bin/mqshutdown broker
 
 sh bin/mqshutdown namesrv
 ```
+
+## 基本概念
+
+生产者

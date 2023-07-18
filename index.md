@@ -21,6 +21,10 @@
 [DDD(Domain-Driven Design)领域驱动设计](https://jeasyplus.com/ddd)
 [微服务概念](https://jeasyplus.com/micro-services)
 [分布式系统](https://jeasyplus.com/distributed-system)
+[MQ消息订阅](https://jeasyplus.com/mq)
+[GEO](https://jeasyplus.com/geo)
+[CDC](https://jeasyplus.com/cdc)
+[数据湖](https://jeasyplus.com/data-lakes)
 
 ---
 [复盘高手](https://jeasyplus.com/thinking/retrospective)
