@@ -181,9 +181,9 @@ channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
 #### 交换类型
 
 + 直接交换机（Direct Exchange）：
-  + 根据消息的**路由键（Routing Key）**，将消息路由到与之完全匹配的队列。
+  + 根据消息的**路由键（Routing Key）**，将消息路由到与之**完全匹配**的队列。
 + 主题交换机（Topic Exchange）：
-  + 根据消息的**路由键和通配符**模式，将消息路由到与之匹配的队列，
+  + 根据消息的**路由键和通配符**模式，将消息路由到与之**匹配**的队列，
 + 扇形交换机（Fanout Exchange）：
   + 将消息**广播**到所有与之绑定的队列，与消息的**路由键无关**。
 + 头部交换机（Headers Exchange）：
@@ -200,6 +200,12 @@ channel.exchangeDeclare("direct_exchange", BuiltinExchangeType.DIRECT);
 channel.basicPublish("direct_exchange", "routing_key", null, message.getBytes());
 ```
 
+```java
+channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
+```
+
 #### 主题交换机（Topic Exchange）：
 
 ```java
@@ -208,6 +214,11 @@ channel.exchangeDeclare("topic_exchange", BuiltinExchangeType.TOPIC);
 
 // 发送消息到主题交换机，使用指定的路由键
 channel.basicPublish("topic_exchange", "order.create", null, message.getBytes());
+```
+```java
+channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, ROUTING_KEY);
 ```
 
 #### 扇形交换机（Fanout Exchange）：
@@ -218,6 +229,12 @@ channel.exchangeDeclare("fanout_exchange", BuiltinExchangeType.FANOUT);
 
 // 发送消息到扇形交换机，不需要指定路由键
 channel.basicPublish("fanout_exchange", "", null, message.getBytes());
+```
+
+```java
+channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
+channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "");
 ```
 
 #### 头部交换机（Headers Exchange）：
@@ -238,12 +255,19 @@ AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
 
 channel.basicPublish("headers_exchange", "", properties, message.getBytes());
 ```
-
+```java
+channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS);
+channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+```
 #### 系统默认交换机（Default Exchange）：
 
 ```java
 // 不需要创建交换机，使用默认交换机将消息路由到指定队列
 channel.basicPublish("", "queue_name", null, message.getBytes());
+```
+
+```java
+channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 ```
 
 ### 路由模式（Routing Mode）
