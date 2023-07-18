@@ -5,6 +5,7 @@
 + [下载安装](https://rocketmq.apache.org/docs/quickStart/01quickstart)
 
 + 启动：
+
 ```shell
 $ nohup sh bin/mqnamesrv &
 
@@ -25,9 +26,7 @@ rocketmq-proxy startup successfully
 
 一旦在proxy.log中看到“代理[代理名称，IP:端口]启动成功..”的信息，意味着**Broker已成功启动**。
 
-**注意:**
-
-已经成功部署了一个单主节点的RocketMQ集群，并且可以通过脚本发送和接收简单的消息。
+此时，已成功部署了一个单主节点的RocketMQ集群，并且可以通过脚本发送和接收简单的消息。
 
 ## 测试
 测试前将Nameserver地址设置到系统中，系统环境变量**NAMESRV_ADDR**。
