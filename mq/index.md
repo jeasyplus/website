@@ -12,7 +12,7 @@
 
 适用于大规模、高可靠、高吞吐量和严格有序消息的场景。
 
-[RocketMQ手册][https://jeasyplus.com/mq/rocketmq]
+[RocketMQ](https://jeasyplus.com/mq/rabbit-mq)
 
 
 ### RabbitMQ
@@ -23,6 +23,8 @@
 + 通过镜像队列和集群模式提供高可用性和负载均衡。
 
 适用于灵活的消息路由和广播机制。
+
+[RocketMQ](https://jeasyplus.com/mq/rabbit-mq)
 
 ### ActiveMQ
 
