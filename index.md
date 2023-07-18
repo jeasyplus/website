@@ -33,7 +33,7 @@
 + [数据湖](https://jeasyplus.com/data-lakes)
 ---
 + [OpenResty](https://jeasyplus.com/open-resty)
-+ [OpenResty](https://jeasyplus.com/gin)
++ [Gin](https://jeasyplus.com/gin)
 + [Laravel](https://jeasyplus.com/laravel)
 
 ---
