@@ -4,6 +4,14 @@
 
 + [下载安装](https://rocketmq.apache.org/docs/quickStart/01quickstart)
 
++ 外网访问
+在 ./conf/broker.conf文件中添加外网地址
+
+```
+namesrvAddr=xx.xx.xx.xx:9876
+brokerIP1=xx.xx.xx.xx
+```
+
 + 启动：
 
 ```shell
@@ -35,6 +43,17 @@ rocketmq-proxy startup successfully
 export NAMESRV_ADDR=localhost:9876
 ```
 注意：外网ip
+
+
+
+### 安装控制台（Dashboard）
+如有需要可以下载[Dashboard jar](https://rocketmq.apache.org/docs/deploymentOperations/04Dashboard)。
+
+启动前记得设置**NAMESRV_ADDR**
+```shell
+export NAMESRV_ADDR=localhost:9876
+```
+
 
 **生产消息**
 

@@ -17,13 +17,17 @@
 
 **ssh-copy-id**：将本地计算机的 SSH 公钥复制到远程计算机上。
 
-## 通过端口查应用
+### 通过端口查应用
 ```shell
 netstat -tuln | grep 8080
 
 lsof -i :8080
 ```
 
+### 查看端口流量
+```shell
+sudo tcpdump -i eth0 port 8080
+```
 
 ## 目录
 

@@ -12,7 +12,7 @@
 
 适用于大规模、高可靠、高吞吐量和严格有序消息的场景。
 
-[RocketMQ](https://jeasyplus.com/mq/rabbit-mq)
+[RocketMQ](https://jeasyplus.com/mq/rocket-mq)
 
 
 ### RabbitMQ
