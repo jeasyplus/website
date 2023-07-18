@@ -4,33 +4,39 @@
 ```
 
 ## jepExcel
-**看一眼**就会，**第二行**就写业务代码的excel工具类，简化对poi、easyExcel的调用。
+**看一眼**就会，**第二行**就开始业务代码的excel工具类，简化对poi、easyExcel的调用。
 
 [Java Easy Plus Excel](https://github.com/jeasyplus/jepexcel)
 
 ---
-[一眼看完python基础](https://jeasyplus.com/python/)
++ [python基础](https://jeasyplus.com/python/)
 
-[ChatGPT Prompt总结](https://jeasyplus.com/chatGPT/ChatGPT文档.pdf)
++ [ChatGPT Prompt总结](https://jeasyplus.com/chatGPT/ChatGPT文档.pdf)
+---
 
-[Java JVM GC工具](https://jeasyplus.com/java_gc)
++ [Java JVM GC工具](https://jeasyplus.com/java_gc)
 [Java JUC](https://jeasyplus.com/java/juc)
-[Redis锁实现](https://jeasyplus.com/redis/lock)
-[Java同步原语](https://jeasyplus.com/java/lock)
-[设计模式-patterns](https://jeasyplus.com/patterns)
-[DDD(Domain-Driven Design)领域驱动设计](https://jeasyplus.com/ddd)
-[微服务概念](https://jeasyplus.com/micro-services)
-[分布式系统](https://jeasyplus.com/distributed-system)
-[MQ消息订阅](https://jeasyplus.com/mq)
-[GEO](https://jeasyplus.com/geo)
-[CDC](https://jeasyplus.com/cdc)
-[数据湖](https://jeasyplus.com/data-lakes)
+
++ [Redis锁实现](https://jeasyplus.com/redis/lock)
++ [Java同步原语](https://jeasyplus.com/java/lock)
++ [设计模式-patterns](https://jeasyplus.com/patterns)
++ [DDD(Domain-Driven Design)领域驱动设计](https://jeasyplus.com/ddd)
++ [微服务概念](https://jeasyplus.com/micro-services)
++ [分布式系统](https://jeasyplus.com/distributed-system)
++ [MQ消息订阅](https://jeasyplus.com/mq)
+---
++ [GEO](https://jeasyplus.com/geo)
++ [CDC](https://jeasyplus.com/cdc)
++ [数据湖](https://jeasyplus.com/data-lakes)
+---
++ [OpenResty](https://jeasyplus.com/open-resty)
++ [OpenResty](https://jeasyplus.com/gin)
++ [Laravel](https://jeasyplus.com/laravel)
 
 ---
-[复盘高手](https://jeasyplus.com/thinking/retrospective)
-[冲突回避](https://jeasyplus.com/thinking/fearofconflict)
-[表达力提升](https://jeasyplus.com/thinking/speaking-skills)
-
++ [复盘高手](https://jeasyplus.com/thinking/retrospective)
++ [冲突回避](https://jeasyplus.com/thinking/fearofconflict)
++ [表达力提升](https://jeasyplus.com/thinking/speaking-skills)
 ---
 有问题联系我：
 
