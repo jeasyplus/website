@@ -34,6 +34,11 @@
 + [分布式系统](https://jeasyplus.com/distributed-system)
 + [MQ消息订阅](https://jeasyplus.com/mq)
 
+#### 服务治理
++ [配置中心](https://jeasyplus.com/dcmc)
++ [Service Mesh](https://jeasyplus.com/service-mesh)
++ [服务保护](https://jeasyplus.com/rate-limiting)
+
 #### 大数据
 + [GEO](https://jeasyplus.com/geo)
 + [CDC](https://jeasyplus.com/cdc)
@@ -43,6 +48,10 @@
 + [OpenResty](https://jeasyplus.com/open-resty)
 + [Gin](https://jeasyplus.com/gin)
 + [Laravel](https://jeasyplus.com/laravel)
+
+## 现代化软件交付
++  [DevOps](https://jeasyplus.com/dev-ops)
++  [敏捷开发](https://jeasyplus.com/agile-development)
 
 ## 自我管理
 + [复盘高手](https://jeasyplus.com/thinking/retrospective)
