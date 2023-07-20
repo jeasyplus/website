@@ -44,6 +44,7 @@
 + [GEO](https://jeasyplus.com/geo)
 + [CDC](https://jeasyplus.com/cdc)
 + [数据湖](https://jeasyplus.com/data-lakes)
++ [HDFS](https://jeasyplus.com/hadoop)
 
 ### 流行框架
 + [OpenResty](https://jeasyplus.com/open-resty)
@@ -53,6 +54,7 @@
 ## 现代化软件交付
 +  [DevOps](https://jeasyplus.com/dev-ops)
 +  [敏捷开发](https://jeasyplus.com/agile-development)
++  [k8s](https://jeasyplus.com/k8s)
 
 ## 自我管理
 + [复盘高手](https://jeasyplus.com/thinking/retrospective)

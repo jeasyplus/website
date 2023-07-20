@@ -1,7 +1,7 @@
 # 服务保护
 
 
-[原理图](https://jeasyplus.com/rate-limiting/limit.png)
+![原理图](https://jeasyplus.com/rate-limiting/limit.png)
  T 表示 水管内部的水量，RT表示请求的处理时间，P表示请求数。
 
 一个请求从进入水管到最终流出，水管中会存在 P * RT　个请求。
