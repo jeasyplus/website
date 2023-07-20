@@ -38,6 +38,7 @@
 + [配置中心](https://jeasyplus.com/dcmc)
 + [Service Mesh](https://jeasyplus.com/service-mesh)
 + [服务保护](https://jeasyplus.com/rate-limiting)
++ [网关]
 
 #### 大数据
 + [GEO](https://jeasyplus.com/geo)
