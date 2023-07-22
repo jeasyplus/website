@@ -45,6 +45,10 @@ sudo tcpdump -i eth0 port 8080
 
 **mv**：移动文件或目录，或重命名文件或目录。
 
+```shell
+chown -R hadoop:hadoop /tmp/hadoop
+```
+
 ## 文本操作
 **cat**：显示文件内容
 
