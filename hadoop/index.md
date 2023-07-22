@@ -12,7 +12,7 @@ ls -l
 
 vim etc/hadoop/hadoop-env.sh
 
-export JAVA_HOME=/usr/java/latest
+export JAVA_HOME=/usr/lib/jvm/jdk-1.8-oracle-x64
 
 source etc/hadoop/hadoop-env.sh
 ```
@@ -54,22 +54,18 @@ etc/hadoop/hdfs-site.xml:
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>/tmp/hadoop-hduser/dfs/name</value>
+        <value>/tmp/hadoop-hadoop/dfs/name</value>
     </property>
 </configuration>
 ```
 
 ### 生成hadoop用户
 ```shell
-sudo useradd -m hduser
-sudo passwd hduser #hd1234qwer
+sudo useradd -m -s /bin/bash -g hadoop hadoop
 
+sudo passwd hadoop #1234qwer
 
-sudo usermod -aG wheel hduser
-# 或者
-sudo usermod -aG sudo hduser    # 将hduser用户加入sudo组
-
-sudo chown -R hduser:hduser /usr/local/hadoop-3.3.6/logs #赋予hduser日志目录权限
+sudo chown -R hadoop:hadoop /usr/local/hadoop-3.3.6/logs #赋予hadoop日志目录权限
 
 ```
 配置Hadoop用户环境变量：
@@ -77,9 +73,9 @@ sudo chown -R hduser:hduser /usr/local/hadoop-3.3.6/logs #赋予hduser日志目�
 vim etc/hadoop/hadoop-env.sh
 ```
 ```xml
-export HDFS_NAMENODE_USER=hduser
-export HDFS_DATANODE_USER=hduser
-export HDFS_SECONDARYNAMENODE_USER=hduser
+export HDFS_NAMENODE_USER=hadoop
+export HDFS_DATANODE_USER=hadoop
+export HDFS_SECONDARYNAMENODE_USER=hadoop
 ```
 
 ## 设置无密码 SSH（也称为无需密码的 SSH）
@@ -87,16 +83,24 @@ export HDFS_SECONDARYNAMENODE_USER=hduser
 ### 生成密钥对
 
 ```shell
-sudo su hduser # 切换到 hduser 用户
+sudo su hadoop # 切换到 hadoop 用户
 
 ssh-keygen -t rsa #生成 SSH 密钥对
 
 ssh-copy-id username@remote_server # 将公钥复制到远程服务器
 
-ssh-copy-id hduser@localhost
+ssh-copy-id hadoop@localhost
+
 # 或者
 cat ~/.ssh/id_rsa.pub | ssh username@remote_server "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+```
 
+root用户执行同样的操作
+
+```shell
+sudo ssh-keygen
+
+sudo ssh-copy-id -i /root/.ssh/id_rsa.pub hadoop@localhost
 ```
 
 
@@ -104,11 +108,11 @@ cat ~/.ssh/id_rsa.pub | ssh username@remote_server "mkdir -p ~/.ssh && cat >> ~/
 
 在任意节点下都可以执行以下命令
 ```shell
-ssh hduser@remote_server
+ssh hadoop@remote_server
 ```
 否则就执行
 ```shell
-ssh-copy-id hduser@remote_server
+ssh-copy-id hadoop@remote_server
 ```
 
 
@@ -117,9 +121,9 @@ ssh-copy-id hduser@remote_server
 bin/hdfs namenode -format #格式化namenode
 ```
 
-## 启动
+## 启动HDFS
 ```shell
-sudo su hduser
+sudo su hadoop
 
 cd /usr/local/hadoop-3.3.6/
 
@@ -129,9 +133,7 @@ sbin/start-dfs.sh
 为MapReduce任务创建HDFS目录
 
 ```shell
-su hduser
-
-bin/hdfs dfs -mkdir -p /user/hduser
+bin/hdfs dfs -mkdir -p /user/hadoop
 ```
 
 
@@ -156,9 +158,9 @@ cat output/*
 ### 查看日志
 
 ```shell
-tail -f logs/hadoop-hduser-datanode-*.novalocal.log
+tail -f logs/hadoop-hadoop-datanode-*.novalocal.log
 
-tail -f ./logs/hadoop-hduser-namenode-*.novalocal.log
+tail -f ./logs/hadoop-hadoop-namenode-*.novalocal.log
 ```
 
 ```shell
@@ -207,22 +209,58 @@ etc/hadoop/yarn-site.xml:
 
 ### 添加环境变量
 
-vim ~/.bash_profile
-
 ```shell
-export JAVA_HOME=/usr/lib/jvm/jdk-1.8-oracle-x64/bin/java
-export HADOOP_CONF_DIR=/usr/local/hadoop-3.3.6/etc/hadoop
-export YARN_RESOURCEMANAGER_USER=hduser
-export YARN_NODEMANAGER_USER=hduser
+su hadoop
+
+vim ~/.bash_profile
 ```
 
-### 启动
+```shell
+export JAVA_HOME=/usr/lib/jvm/jdk-1.8-oracle-x64
+export HADOOP_CONF_DIR=/usr/local/hadoop-3.3.6/etc/hadoop
+export YARN_RESOURCEMANAGER_USER=hadoop
+export YARN_NODEMANAGER_USER=hadoop
+```
+```shell
+source ~/.bash_profile
+```
 
 ```shell
- sbin/start-dfs.sh
+bin/yarn --daemon stop resourcemanager
+
+bin/yarn --daemon stop nodemanager
+
+
+```
+
+### 启动yarn
+
+```shell
+sbin/start-yarn.sh
 ```
 
 停机
 ```shell
-sbin/stop-dfs.sh
+sbin/stop-yarn.sh
 ```
+
+
+#### 相关命令
+```shell
+sudo chown -R hadoop:hadoop /tmp/hadoop-hduser/dfs/name
+```
+
+### Yarn
+http://localhost:8088/
+
+### NameNode
+vim etc/hadoop/hdfs-site.xml
+```xml
+<configuration>
+    <property>
+    <name>dfs.namenode.http-address</name>
+    <value>localhost:50070</value>
+    </property>
+</configuration>
+```
+http://localhost:9870/

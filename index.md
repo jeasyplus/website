@@ -33,6 +33,8 @@
 + [微服务概念](https://jeasyplus.com/micro-services)
 + [分布式系统](https://jeasyplus.com/distributed-system)
 + [MQ消息订阅](https://jeasyplus.com/mq)
+### 数据库
++ [MySQL](https://jeasyplus.com/mysql)
 
 #### 服务治理
 + [配置中心](https://jeasyplus.com/dcmc)
@@ -45,6 +47,7 @@
 + [CDC](https://jeasyplus.com/cdc)
 + [数据湖](https://jeasyplus.com/data-lakes)
 + [HDFS](https://jeasyplus.com/hadoop)
++ [Spark](https://jeasyplus.com/spark)
 
 ### 流行框架
 + [OpenResty](https://jeasyplus.com/open-resty)
