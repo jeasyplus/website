@@ -33,16 +33,17 @@
 + [微服务概念](https://jeasyplus.com/micro-services)
 + [分布式系统](https://jeasyplus.com/distributed-system)
 + [MQ消息订阅](https://jeasyplus.com/mq)
+
 ### 数据库
 + [MySQL](https://jeasyplus.com/mysql)
 
-#### 服务治理
+### 服务治理
 + [配置中心](https://jeasyplus.com/dcmc)
 + [Service Mesh](https://jeasyplus.com/service-mesh)
 + [服务保护](https://jeasyplus.com/rate-limiting)
-+ [网关]
++ [网关](https://jeasyplus.com/gateway)
 
-#### 大数据
+### 大数据
 + [GEO](https://jeasyplus.com/geo)
 + [CDC](https://jeasyplus.com/cdc)
 + [数据湖](https://jeasyplus.com/data-lakes)
@@ -65,6 +66,6 @@
 + [表达力提升](https://jeasyplus.com/thinking/speaking-skills)
 + [Ability](https://jeasyplus.com/thinking/ability)
 
-#### 有问题联系我：
+## call for help：
 
 <img src="https://jeasyplus.com/images/home/wechat_1618.JPG" alt="call me" width="280" height="380">

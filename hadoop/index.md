@@ -264,3 +264,21 @@ vim etc/hadoop/hdfs-site.xml
 </configuration>
 ```
 http://localhost:9870/
+
+
+### 调整MR资源
+
+```shell
+vim /usr/local/hadoop-3.3.6/etc/hadoop/capacity-scheduler.xml
+```
+```xml
+<property>
+    <name>yarn.scheduler.capacity.maximum-am-resource-percent</name>
+    <value>0.5</value>
+    <description>
+      Maximum percent of resources in the cluster which can be used to run
+      application masters i.e. controls number of concurrent running
+      applications.
+    </description>
+  </property>
+```

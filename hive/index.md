@@ -1,8 +1,13 @@
 # Hive
 
 + [下载](https://www.apache.org/dyn/closer.cgi/hive)
++ [hive+spark版本匹配列表](https://cwiki.apache.org/confluence/display/Hive/Hive+on+Spark%3A+Getting+Started)
+
+
+
 
 ## 安装
+
 
 ```shell
 vim ~/.bash_profile
@@ -34,6 +39,7 @@ property.hive.log.dir = /var/log/hive/${sys:user.name}
 ```
 
 上传相应的jdbc Driver到$hive_home/lib下
+配置mateStore
 ```shell
 vim conf/hive-site.xml
 ```
@@ -49,17 +55,21 @@ vim conf/hive-site.xml
 <name>javax.jdo.option.ConnectionPassword</name>
 
 <name>javax.jdo.option.ConnectionDriverName</name>
-<value>com.mysql.jdbc.Driver</value>
+<value>com.mysql.cj.jdbc.Driver</value>
 ```
 
 ```shell
 <name>hive.server2.logging.operation.log.location</name>
-
-<name>hive.exec.local.scratchdir</name>
-
-<name>hive.downloaded.resources.dir</name>
+<value>/tmp/hadoop/operation_logs</value>
 
 <name>hive.querylog.location</name>
+<value>/tmp/hadoop</value>
+
+<name>hive.exec.local.scratchdir</name>
+<value>/tmp/hadoop</value>
+
+<name>hive.downloaded.resources.dir</name>
+<value>/tmp/hadoop_resources</value>
 ```
 
 如果出现初始中出现如下异常，定位到指定行，删除该行或删除特殊字符
@@ -201,7 +211,7 @@ hive
 
 use jeasyplus;
 
-LOAD DATA INPATH 'hdfs://localhost:9000/user/hive/warehouse/dwd_database.db/user_data/user_data.txt' INTO TABLE user_data;
+LOAD DATA INPATH '/user/hive/warehouse/dwd_database.db/user_data/user_data.txt' INTO TABLE user_data;
 ```
 
 ### 查询
@@ -223,6 +233,27 @@ hive -f query.sql
 </property>
 ```
 
+集成spark后，执行如果出现spark相关class找不到的情况可以，把spark相关jar上传到hdfs上，并通过配置告之hive
+```shell
+hdfs dfs -put /usr/local/spark-3.3.2/jars/* /user/<your_username>/spark-jars/
+
+hdfs dfs -ls /user/hadoop/spark-jars/
+Found 3 items
+-rw-r--r--   1 hadoop supergroup    5443542 2023-07-23 20:57 /user/hadoop/spark-jars/scala-library-2.12.15.jar
+-rw-r--r--   1 hadoop supergroup   11008412 2023-07-23 20:31 /user/hadoop/spark-jars/spark-core_2.12-3.3.2.jar
+-rw-r--r--   1 hadoop supergroup    2415854 2023-07-23 21:04 /user/hadoop/spark-jars/spark-network-common_2.12-3.3.2.jar
+```
+
+```shell
+ vim conf/hive-site.xml
+```
+```shell
+<property>
+  <name>spark.yarn.jars</name>
+  <value>hdfs://xxxx:8020/spark-jars/*</value>
+</property>
+```
+hdfs单机版：端口为9000
 
 
 
