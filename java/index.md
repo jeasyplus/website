@@ -1,4 +1,6 @@
 
++ [Java Class](https://jeasyplus.com/java/class)
++ [Java Object](https://jeasyplus.com/java/object)
 + [Java IO模型](https://jeasyplus.com/java/io)
 + [Java 内存模型](https://jeasyplus.com/java/jmm)
 + [Java JUC](https://jeasyplus.com/java/juc)
