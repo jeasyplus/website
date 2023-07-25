@@ -24,7 +24,8 @@
 + [ChatGPT Prompt总结](https://jeasyplus.com/chatGPT/ChatGPT文档.pdf)
 
 ### Java
-+ [Java JVM GC工具](https://jeasyplus.com/java_gc)
++ [Java](https://jeasyplus.com/java)
++ [Java GC](https://jeasyplus.com/java_gc)
 + [Java JUC](https://jeasyplus.com/java/juc)
 + [Redis锁实现](https://jeasyplus.com/redis/lock)
 + [Java同步原语](https://jeasyplus.com/java/lock)
