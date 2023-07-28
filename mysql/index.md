@@ -9,5 +9,7 @@
 + [执行计划](https://jeasyplus.com/mysql/explain)
 
 + [SQL优化](https://jeasyplus.com/mysql/sql-optimization)
+
++ [分库分表](https://jeasyplus.com/mysql/shardingsphere)
     
 
