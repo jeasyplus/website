@@ -1,10 +1,11 @@
-# shardingsphere
+# ShardingSphere-JDBC
 
-## ShardingSphere-JDBC
++ [ShardingSphere-JDBC](https://shardingsphere.apache.org)
 
-### 集成配置
+## 集成配置
 
-#### maven
+**pom.xml**
+
 ```xml
 <dependency>
     <groupId>org.apache.shardingsphere</groupId>
@@ -120,7 +121,9 @@ public final class NacosDriverURLProvider implements ShardingSphereDriverURLProv
 
 ```
 
-### 数据库分片配置
+## 分库分表配置
+
+### 数据库和表
 
 共三个数据库实例，每个实例分拆两张表(**t_person_0、t_person_1**)。
 
@@ -147,7 +150,7 @@ create table jeasyplus.t_person_tag_0
 );
 ```
 
-#### ShardingSphere-JDBC数据源和分片规则配置
+### 数据源和分片规则
 
 [相关说明参考](https://shardingsphere.apache.org/document/current/cn/user-manual/shardingsphere-jdbc/yaml-config/rules/sharding/)
 
