@@ -5,7 +5,7 @@
 ### 集成配置
 
 #### maven
-```shell
+```XML
 <dependency>
     <groupId>org.apache.shardingsphere</groupId>
     <artifactId>shardingsphere-jdbc-core</artifactId>
@@ -43,8 +43,11 @@ spring.datasource.driver-class-name=org.apache.shardingsphere.driver.ShardingSph
 ```
 
 #### 自定义Provider
+添加META文件
 
 **src/main/resources/META-INF/services/org.apache.shardingsphere.driver.jdbc.core.driver.ShardingSphereDriverURLProvider**
+
+文件内容：
 
 ```text
 com.jeasyplus.shareding.NacosDriverURLProvider
@@ -101,7 +104,7 @@ public final class NacosDriverURLProvider implements ShardingSphereDriverURLProv
         serverAddr = serverAddr + ":" + port;
         Properties properties = new Properties();
         properties.put("serverAddr", serverAddr);
-        //也可写到配置文件中，然后在上面代码中解析
+        //可以写到配置文件中，在上面代码中解析
         properties.put("username", "nacos");
         properties.put("password", "nacos");
         try {
@@ -118,10 +121,10 @@ public final class NacosDriverURLProvider implements ShardingSphereDriverURLProv
 
 ### 数据库分片配置
 
-三个mysql实例，每个实例两张表(**t_person_0,t_person_1**)。
+共三个mysql实例，每个实例分拆两张表(**t_person_0、t_person_1**)。
 
 附加一个从表，用于测试**绑定表**
-
+**t_person**
 ```shell
 create table jeasyplus.t_person_0
 (
@@ -131,6 +134,7 @@ last_name  varchar(20) null,
 shared_id  int         null
 );
 ```
+**t_person_tag**
 ```shell
 create table jeasyplus.t_person_tag_0
 (
@@ -186,12 +190,12 @@ rules:
             shardingColumn: person_id  #从表分片键
             shardingAlgorithmName: t_person_tag_inline  #从表分片策略
       bindingTables:
-        - t_person,t_person_tag  #绑定表
+        - t_person,t_person_tag  #绑定表，遇到联表查询数据集关联出错时再配
     defaultDatabaseStrategy:   
       standard:
         shardingColumn: shared_id # 数据库实例分片键
         shardingAlgorithmName: database_inline  # 数据库实例分片策略
-    shardingAlgorithms:  #具体的策略配置，供上面引用
+    shardingAlgorithms:  #具体的分片策略（数据库、表），供上面引用
       database_inline:
         type: INLINE
         props:
