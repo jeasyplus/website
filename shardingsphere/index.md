@@ -5,7 +5,7 @@
 ### 集成配置
 
 #### maven
-```XML
+```xml
 <dependency>
     <groupId>org.apache.shardingsphere</groupId>
     <artifactId>shardingsphere-jdbc-core</artifactId>
