@@ -29,25 +29,26 @@
 </dependency>
 ```
 
-如果使用在项目中进行数据源和分片配置就不用自定义Provider，如下：
+如果在项目中使用配置文件定义数据源和分片规则，就不用自定义Provider，如下：
+
 **application.properties**
 ```properties
 spring.datasource.url=jdbc:shardingsphere:classpath:server.yaml
 spring.datasource.driver-class-name=org.apache.shardingsphere.driver.ShardingSphereDriver
 ```
 
-如果使用nacos配置信息，需要自定义，如下
+如果使用nacos配置中心，需要自定义，如下
 ```properties
 spring.datasource.url=jdbc:shardingsphere:nacos:127.0.0.1:8848:sharding
 spring.datasource.driver-class-name=org.apache.shardingsphere.driver.ShardingSphereDriver
 ```
 
 #### 自定义Provider
-添加META文件
+在resources目录下添加META-INF目录，新增一个SPI文件
 
 **src/main/resources/META-INF/services/org.apache.shardingsphere.driver.jdbc.core.driver.ShardingSphereDriverURLProvider**
 
-文件内容：
+SPI文件内容：
 
 ```text
 com.jeasyplus.shareding.NacosDriverURLProvider
@@ -121,9 +122,10 @@ public final class NacosDriverURLProvider implements ShardingSphereDriverURLProv
 
 ### 数据库分片配置
 
-共三个mysql实例，每个实例分拆两张表(**t_person_0、t_person_1**)。
+共三个数据库实例，每个实例分拆两张表(**t_person_0、t_person_1**)。
 
-附加一个从表，用于测试**绑定表**
+附加一张从表，用于测试**绑定表**
+
 **t_person**
 ```shell
 create table jeasyplus.t_person_0
