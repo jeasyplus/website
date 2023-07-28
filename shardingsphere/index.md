@@ -131,7 +131,7 @@ create table jeasyplus.t_person_0
 id         bigint auto_increment primary key,
 first_name varchar(20) null,
 last_name  varchar(20) null,
-shared_id  int         null
+shared_id  int         null # 与id同值，如果全局使用一个种分库策略，单独搞一个字段很有必要，否则，直接用业务字段
 );
 ```
 **t_person_tag**
@@ -141,7 +141,7 @@ create table jeasyplus.t_person_tag_0
     id        bigint auto_increment primary key,
     tag       varchar(12) null,
     person_id bigint         null,
-    shared_id int         null
+    shared_id int         null # 与person_id同值
 );
 ```
 
@@ -179,6 +179,7 @@ rules:
     tables:
       t_person:      # 主表                                     
         actualDataNodes: db_${0..2}.t_person_${0..1}
+        # databaseStrategy : # 分库策略，缺省表示使用默认分库策略，该示例，统一使用一个默认配置 database_inline，下面有配置。
         tableStrategy:
           standard:
             shardingColumn: id   #主表分片键
