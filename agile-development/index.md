@@ -38,4 +38,108 @@
 
 + **度量和监控：** 通过度量和监控项目的进度和质量指标，及时发现问题和瓶颈，并做出相应的调整。
 
+## Scrum会议
+
+### Sprint Planning（迭代计划会）：
+
+在每个迭代开始之前，团队进行Sprint Planning会议。
+
+会议中，团队一起讨论并确定即将开始的迭代（Sprint）的目标和计划。
+
+团队会评估过去的Sprint，讨论尚未完成的任务，并确定下一个Sprint的任务列表和目标。
+
+会议通常分为两部分：第一部分确定要完成的任务，第二部分讨论如何完成这些任务。
+
++ 产物：
+
+  + Sprint目标（Sprint Goal）： 在Sprint Planning会议中，团队一起制定Sprint目标，即本次迭代要实现的具体目标和期望的结果。Sprint目标通常与产品目标对应，并描述了在这个Sprint期间团队计划要完成的功能、特性或问题解决方案。
+  + Sprint回顾待办项（Sprint Backlog）： Sprint Planning的一个重要产物是Sprint回顾待办项，也称为Sprint Backlog。Sprint回顾待办项是在会议中讨论和确定的，它包含了在这个Sprint期间团队计划要完成的所有任务、功能或需求项。团队根据产品待办项和优先级，选择并预估Sprint回顾待办项，并在Sprint Backlog中进行记录。
+  + 任务估算（Task Estimation）： 在Sprint Planning中，团队进行任务估算，即对选定的Sprint回顾待办项进行工作量估算。通常，团队使用相对估算（如故事点）或小时数来估算任务的工作量。这有助于团队在Sprint期间合理安排工作，并确保能够完成承诺的工作量。
+  + 冲刺计划（Sprint Plan）： 在Sprint Planning会议结束时，团队将形成一个冲刺计划，即团队计划在Sprint期间要完成的任务和目标。冲刺计划对应于Sprint回顾待办项，其中包含任务的优先级、估算工作量和分配给团队成员的责任。
+
+
+
+### Daily Standup（每日站会）：
+
+Daily Standup是每天团队成员之间的短暂会议，通常持续15分钟左右。
+   
+会议中，每个团队成员分享他们**昨天的工作进展**、**今天的计划**以及**是否遇到了阻碍**。
+
+这有助于整个团队了解项目的进展情况，识别潜在问题，并促进及时的协调与合作。
+
+### Sprint Review（迭代回顾）：
+   
+每个迭代结束时，团队进行Sprint Review会议。
+
+会议中，团队展示他们在迭代中完成的工作，并邀请相关利益相关者提供反馈。
+
+这有助于确保项目进展与预期目标一致，以及及时修正可能的偏差。
+
+### Sprint Retrospective（迭代总结）：
+   
+每个迭代结束后的另一个会议，用于团队回顾和总结过去迭代的经验。
+
+在这个会议中，团队讨论他们的工作方式，确定哪些做得好的地方，以及哪些需要改进的方面。
+
+这有助于促进团队不断学习和持续改进，以提高工作效率和质量。
+
+### 时间周期
+
+#### Sprint Planning（迭代计划会）：
+
+时间周期：通常为每个Sprint的第一天。
+
+时间长度：视项目复杂性和团队大小而定，通常为2至4小时。
+
++ 参与角色：Scrum团队（Development Team）、产品负责人（Product Owner）
+
++ 主导者：产品负责人（Product Owner）
+
++ 角色：产品负责人主导第一部分，团队成员主导第二部分
+
++ Scrum Master：
+  + 辅导和促进：Scrum Master帮助团队顺利进行Sprint Planning会议，确保会议的目标清晰，帮助团队理解产品待办项和优先级。 
+  + +确保估算准确：Scrum Master鼓励团队成员参与到任务的估算过程中，确保任务的规模和复杂性被适当地估算。 
+  + 移除障碍：Scrum Master帮助团队识别并解决在Sprint Planning中可能遇到的障碍，确保团队在决策和任务选择过程中顺利进行。
+
+#### Daily Standup（每日站会）：
+
+时间周期：每个Sprint的工作日（通常是每天）。
+
+时间长度：通常持续15分钟，要保持简洁、高效。
+
++ 参与角色：Scrum团队（Development Team）、Scrum主管（Scrum Master）
++ 主导者：团队成员（Scrum团队）
++ 角色：每个团队成员依次分享进展和计划，Scrum Master可能协助引导会议。
+
+#### Sprint Review（迭代回顾）：
+
+时间周期：每个Sprint结束时。
+
+时间长度：视项目复杂性和Sprint的长度而定，通常为1至2小时。
+
++ 参与角色：Scrum团队（Development Team）、产品负责人（Product Owner）、相关利益相关者（Stakeholders）
++ 主导者：产品负责人（Product Owner）
++ 角色：产品负责人主导，团队成员演示完成的工作
++ Scrum Master：
+  + 协调和引导：Scrum Master在Sprint Review会议中起到引导和协调的作用，确保团队展示他们在Sprint中所完成的功能，与相关利益相关者进行交流和反馈。
+  + 收集反馈：Scrum Master帮助团队收集来自相关利益相关者的反馈和意见，促进有意义的讨论和决策，以便进一步改进产品。
+
+#### Sprint Retrospective（迭代总结）：
+
+时间周期：每个Sprint结束时，一般在Sprint Review之后进行。
+
+时间长度：视项目复杂性和团队大小而定，通常为1至2小时。
+
++ 参与角色：Scrum团队（Development Team）、Scrum主管（Scrum Master）
++ 主导者：Scrum主管（Scrum Master）
++ 角色：Scrum主管引导团队成员回顾迭代过程，识别改进机会
+
+在Scrum框架中，产品负责人（Product Owner）主要负责产品方面的工作，包括制定产品愿景、需求管理和优先级排序等。Scrum主管（Scrum Master）则主要负责敏捷实践的指导、团队协调与解决障碍等。团队成员则是项目的执行者，负责完成Sprint期间的工作。
+
+Scrum团队是一个自组织的团队，他们共同合作来达成项目目标。在每个会议中，虽然有主导者，但Scrum团队成员都有责任参与并为会议的顺利进行做出贡献。这种协作和共同负责的方式有助于确保Scrum框架的有效实施和项目的成功。
+
+
+
+
 

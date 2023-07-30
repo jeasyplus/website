@@ -43,6 +43,7 @@
 + [MySQL](https://jeasyplus.com/mysql)
 
 ### 服务治理
++ [服务治理](https://jeasyplus.com/service-governance)
 + [配置中心](https://jeasyplus.com/dcmc)
 + [Service Mesh](https://jeasyplus.com/service-mesh)
 + [服务保护](https://jeasyplus.com/rate-limiting)
