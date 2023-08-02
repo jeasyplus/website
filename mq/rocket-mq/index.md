@@ -172,7 +172,9 @@ MQ要传输的内容。
 ```java
 consumer.subscribe("TopicTest", "TagA || TagB");
 ```
+
 + SQL92 过滤。
+
 ```java
   consumer.subscribe("TopicTest", MessageFilter.get(
                 FilterFactory.INSTANCE.get(MessageFilter.class).compile("Tag is not null", ExpressionType.SQL92)
@@ -184,12 +186,15 @@ consumer.subscribe("TopicTest", "TagA || TagB");
 ### 死信队列
 
 用于存储无法被正常消费的消息
+
 ```java
  // 设置消息的最大重试次数和重试间隔时间（单位：毫秒）
  message.setRetryTimesWhenSendFailed(3);
  message.setRetryAnotherBrokerInterval(1000);
 ```
+
 消费者订阅死信队列主题，处理无法被正常消费的消息。
+
 ```java
 // 订阅死信队列主题
 consumer.subscribe("DLQTopic", "*");

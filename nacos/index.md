@@ -1,9 +1,24 @@
 # Nacos
 
-## 依赖
+## 配置
+
+conf/application.propertie
+
+```properties
+nacos.core.auth.system.type=nacos
+nacos.core.auth.enabled=true
+
+nacos.core.auth.plugin.nacos.token.secret.key=base64(32位String)
+
+
+```
+
+## 微服务集成
+
+### 依赖
 pom.xml
 ```xml
-  <dependency>
+<dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter</artifactId>
 </dependency>
@@ -16,6 +31,12 @@ pom.xml
     <groupId>com.alibaba.cloud</groupId>
     <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
     <version>2.1.4.RELEASE</version>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </exclusion>
+    </exclusions>
 </dependency>
 <dependency>
     <groupId>org.springframework.cloud</groupId>

@@ -18,6 +18,8 @@ JMS标准支持：ActiveMQ是JMS（Java Message Service）的一种实现，对�
 
 ## RocketMQ：
 
+[RocketMQ](https://jeasyplus.com/mq/rocket-mq)
+
 高性能、分布式事务
 
 高性能：RocketMQ是阿里巴巴开源的消息中间件，具有出色的性能和吞吐量，适用于高并发场景。
@@ -60,7 +62,6 @@ JMS标准支持：ActiveMQ是JMS（Java Message Service）的一种实现，对�
 
 支持自定义的 RocketMQ 协议、支持高吞吐量和低延迟、支持多种消息模式、默认支持消息持久化、适用于大规模分布式系统。
 
-[RocketMQ](https://jeasyplus.com/mq/rocket-mq)
 
 
 ### RabbitMQ
