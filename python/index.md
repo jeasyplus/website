@@ -1,6 +1,6 @@
 # Python  Roadmap
 
-+ [语法和基本概念]：(https://jeasyplus.com/python/base)
++ [语法和基本概念](https://jeasyplus.com/python/base)
 
 熟悉 Python 的语法规则，了解变量、数据类型、运算符、条件语句、循环语句等基本概念。
 
