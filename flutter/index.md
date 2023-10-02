@@ -23,6 +23,9 @@ sudo xcodebuild --license
 安装 CocoaPods
 安装前更新镜像源：
 ```shell
+/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+
+
 gem update --system
 
 gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
@@ -30,10 +33,30 @@ gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/
 gem sources --add https://ruby.taobao.org/ --remove https://rubygems.org/
 ```
 ```shell
-sudo gem install cocoapods --user-install --verbose
+sudo gem uninstall cocoapods
+
+sudo gem list --local | grep cocoapods
+
+#卸载相关插件
+...
+
+#安装 CocoaPods
+sudo gem install -n /usr/local/bin cocoapods--verbose
 
 pod --version
+
+pod repo update --verbose
+
+#替换镜像源
+sudo gem sources --remove https://rubygems.org/
+sudo gem sources --add https://gems.ruby-china.com
+gem sources -l
+
+#本地缓存
+pod cache list
 ```
+
+
 
 ### Android Studio
 
